@@ -12,7 +12,26 @@ export default defineConfig(({ mode }) => ({
       overlay: false,
     },
   },
-  plugins: [react(), mode === "development" && componentTagger()].filter(Boolean),
+  plugins: [
+    react(),
+    mode === "development" && componentTagger(),
+    {
+      name: "ignore-fs-face-api",
+      enforce: "pre",
+      resolveId(source) {
+        if (source === "fs") {
+          return "\0ignore-fs";
+        }
+        return null;
+      },
+      load(id) {
+        if (id === "\0ignore-fs") {
+          return "export default {}";
+        }
+        return null;
+      },
+    },
+  ].filter(Boolean),
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),

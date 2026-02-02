@@ -402,7 +402,6 @@ const UserKYC = () => {
             )}
           </CardContent>
         </Card>
-      </main>
 
       {/* KYC Dialog */}
       <Dialog open={isKYCDialogOpen} onOpenChange={setIsKYCDialogOpen}>

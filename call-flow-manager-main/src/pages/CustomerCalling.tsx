@@ -136,7 +136,7 @@ const CustomerCalling = () => {
   if (loading) {
     return (
       <DashboardLayout>
-        <div className="flex items-center justify-center h-96">
+        <div className="flex items-center justify-center min-h-[60vh]">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
         </div>
       </DashboardLayout>
@@ -219,23 +219,37 @@ const CustomerCalling = () => {
                   )}
                 </div>
 
-                {/* Navigation */}
-                <div className="flex justify-between pt-4 border-t">
+                {/* Navigation & Call Now */}
+                <div className="flex flex-col gap-3 pt-4 border-t">
+                  <div className="flex justify-between">
+                    <Button
+                      variant="outline"
+                      onClick={goPrev}
+                      disabled={currentIndex === 0}
+                    >
+                      <ChevronLeft className="w-4 h-4 mr-1" />
+                      Previous
+                    </Button>
+                    <Button
+                      variant="outline"
+                      onClick={goNext}
+                      disabled={currentIndex === customers.length - 1}
+                    >
+                      Next
+                      <ChevronRight className="w-4 h-4 ml-1" />
+                    </Button>
+                  </div>
                   <Button
-                    variant="outline"
-                    onClick={goPrev}
-                    disabled={currentIndex === 0}
+                    className="w-full"
+                    variant="default"
+                    onClick={() => {
+                      if (currentCustomer?.customer_phone) {
+                        window.open(`tel:${currentCustomer.customer_phone}`);
+                      }
+                    }}
                   >
-                    <ChevronLeft className="w-4 h-4 mr-1" />
-                    Previous
-                  </Button>
-                  <Button
-                    variant="outline"
-                    onClick={goNext}
-                    disabled={currentIndex === customers.length - 1}
-                  >
-                    Next
-                    <ChevronRight className="w-4 h-4 ml-1" />
+                    <Phone className="w-4 h-4 mr-2" />
+                    Call Now
                   </Button>
                 </div>
               </CardContent>

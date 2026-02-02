@@ -621,8 +621,7 @@ const LiveMonitoring = () => {
           caller={selectedCaller} 
           onClose={() => setSelectedCaller(null)} 
         />
-      </main>
-    </div>
+    </DashboardLayout>
   );
 };
 
